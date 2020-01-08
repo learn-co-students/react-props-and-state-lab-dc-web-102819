@@ -9,7 +9,7 @@ class Pet extends React.Component {
         <div className="content">
           <a className="header">
             {/*'♀' OR '♂' */}
-            {gender === 'male' ? <span>♂</span> : <span>♀</span>}
+            {gender === 'male' ? <span>♂ </span> : <span>♀ </span>}
             {name}
           </a>
           <div className="meta">
@@ -21,8 +21,11 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          <button className="ui disabled button">Already adopted</button>
-          <button className="ui primary button">Adopt pet</button>
+          {
+            isAdopted === false
+            ? <button data-id={id} className="ui primary button" onClick={e => this.props.onAdoptPet(e.target.dataset.id)}>Adopt pet</button>
+            : <button className="ui disabled button">Already adopted</button>
+          }
         </div>
       </div>
     )

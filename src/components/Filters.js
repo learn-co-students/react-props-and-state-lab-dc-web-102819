@@ -4,13 +4,14 @@ class Filters extends React.Component {
   render() {
     // console.log('inside Filters ', this.props)
     // debugger
+    // let typeValue = null
     return (
       <div className="ui form">
         <h3>Animal type</h3>
         <div className="field">
           <select name="type" id="type" onChange={e =>{
             // console.log('event value is: ', e.target.value)
-
+            // typeValue = e.target.typeValue
             this.props.onChangeType(e.target.value)
             // this.props.doFetch(e.target.value)
             }
@@ -23,7 +24,7 @@ class Filters extends React.Component {
         </div>
 
         <div className="field">
-          <button className="ui secondary button">Find pets</button>
+          <button className="ui secondary button" onClick={this.props.onFindPetsClick}>Find pets</button>
         </div>
       </div>
     )
