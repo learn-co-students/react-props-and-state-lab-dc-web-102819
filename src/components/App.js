@@ -15,22 +15,36 @@ class App extends React.Component {
     }
   }
 
-  helperMethodForFetch = (filterby)=>{
-    fetch('/api/pets'+'?type='+filterby)
-    .then(res=> res.json())
-    .then(data => console.log(data))
-    .catch(err=> console.log(err.message))
+  helperMethodForFetch = (filterBy) => {
+    filterBy === 'all'
+    ?
+      fetch('/api/pets')
+      .then(res=> res.json())
+      .then(pets => this.setState({
+        pets: pets,
+        filters: filterBy
+      }))
+      .catch(err=> console.log(err.message))
+    :
+      fetch('/api/pets?type='+filterBy)
+      .then(res=> res.json())
+      .then(pets => this.setState({
+        pets: pets,
+        filters: filterBy
+      }))
+      .catch(err=> console.log(err.message))
   }
-
-  filterWithDropdown = (fSelect) => {
+//
+   filterWithDropdown(filterBy, data){
     // console.log('Inside filterWithDropdown ', fSelect)
     // helperMethodForFetch(fSelect)
-    this.setState({
-      filters:{
-        type: fSelect
-      }
-    })
-  }
+      return this.setState({
+        pets: data,
+        filters:{
+          type: filterBy
+        }
+      })
+    }
 
   render() {
     return (
@@ -41,12 +55,12 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters onChangeType={this.filterWithDropdown}
-                doFetch={this.helperMethodForFetch}
+              <Filters onChangeType={this.helperMethodForFetch}
+                // doFetch={this.helperMethodForFetch}
               />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser petsData= {this.state.pets}/>
             </div>
           </div>
         </div>
