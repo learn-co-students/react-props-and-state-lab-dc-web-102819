@@ -15,6 +15,23 @@ class App extends React.Component {
     }
   }
 
+  helperMethodForFetch = (filterby)=>{
+    fetch('/api/pets'+'?type='+filterby)
+    .then(res=> res.json())
+    .then(data => console.log(data))
+    .catch(err=> console.log(err.message))
+  }
+
+  filterWithDropdown = (fSelect) => {
+    // console.log('Inside filterWithDropdown ', fSelect)
+    // helperMethodForFetch(fSelect)
+    this.setState({
+      filters:{
+        type: fSelect
+      }
+    })
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -24,7 +41,9 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.filterWithDropdown}
+                doFetch={this.helperMethodForFetch}
+              />
             </div>
             <div className="twelve wide column">
               <PetBrowser />
