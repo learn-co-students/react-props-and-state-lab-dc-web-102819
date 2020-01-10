@@ -71,8 +71,8 @@ descendants:
   <!-- - **Even though we're using `fetch` here, its responses have been mocked in
     order to make the tests work properly. That means it's important to use the
     _exact_ URLs as described above, or your tests will fail!** -->
-
-5. Finally, App should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser
+<!-- 
+5. Finally, App should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser -->
    />`. This callback should take in an id for a pet, find the matching pet in
    `state.pets` and set the `isAdopted` property to `true`.
 
